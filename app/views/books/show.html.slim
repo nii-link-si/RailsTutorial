@@ -1,0 +1,18 @@
+p#notice
+  = notice
+p
+  strong
+    | Name:
+  = @book.name
+= link_to '借りる', rental_book_path(@book), data: { confirm: '借りますか？' }, method: :get, :class => 'btn btn-primary rental_button', remote: true
+|  | 
+= link_to 'Edit', edit_book_path(@book)
+|  | 
+= link_to 'Back', books_path
+
+javascript:
+  $('.rental_button').on('ajax:success', function(event) {
+    alert('借りれました！')
+  }).on('ajax:error', function(event) {
+    alert('エラーが起きたので借りれませんでした')
+  })
